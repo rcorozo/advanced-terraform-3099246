@@ -48,4 +48,6 @@ resource "google_compute_instance" "nginx_instance" {
       // Ephemeral public IP
     }
   }
+
+  metadata_startup_script = "apt update && apt install -y nginx && systemctl start nginx"
 }
