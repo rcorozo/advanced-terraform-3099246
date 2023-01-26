@@ -9,7 +9,7 @@ terraform {
 
 
 provider "google" {
-  project = "advancedterraform" #replace this with your project-id
+  project = "advancedterraform-375912" #replace this with your project-id
   region  = "us-central1"
   zone    = "us-central1-a"
 }
