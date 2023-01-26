@@ -44,8 +44,8 @@ resource "google_compute_instance" "nginx_instance" {
   network_interface {
     network = data.google_compute_network.default.self_link
     subnetwork = google_compute_subnetwork.subnet-1.self_link
-    /* access_config {
-      
-    } */
+    access_config {
+      // Ephemeral public IP
+    }
   }
 }
