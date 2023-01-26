@@ -1,10 +1,3 @@
-### PROVIDER
-provider "google" {
-  project = "advancedterraform" #replace this with your project-id
-  region  = "us-central1"
-  zone    = "us-central1-a"
-}
-
 ### NETWORK
 data "google_compute_network" "default" {
   name                    = "default"
@@ -51,14 +44,14 @@ resource "google_compute_instance" "nginx_instance" {
   network_interface {
     network = data.google_compute_network.default.self_link
     subnetwork = google_compute_subnetwork.subnet-1.self_link
-    access_config {
+    /* access_config {
       
-    }
+    } */
   }
 }
 
 ## WEB1
-resource "google_compute_instance" "web1" {
+/* resource "google_compute_instance" "web1" {
   name         = "web1"
   machine_type = "f1-micro"
   
@@ -121,5 +114,5 @@ resource "google_compute_instance" "mysqldb" {
   network_interface {
     network = data.google_compute_network.default.self_link
     subnetwork = google_compute_subnetwork.subnet-1.self_link
-  }  
+  } */  
 }
