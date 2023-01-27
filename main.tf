@@ -1,19 +1,19 @@
 ### NETWORK
 data "google_compute_network" "default" {
-  name                    = "default"
+  name                    = var.vpc_name
 }
 
 ## SUBNET
 resource "google_compute_subnetwork" "subnet-1" {
-  name                     = "subnet1"
-  ip_cidr_range            = "10.127.0.0/20"
+  name                     = var.my_subnet.name
+  ip_cidr_range            = var.my_subnet.ip_range
   network                  = data.google_compute_network.default.self_link
-  region                   = "us-central1"
+  region                   = var.my_subnet.region
   private_ip_google_access = true
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "test-firewall"
+  name    = var.firewall_name
   network = data.google_compute_network.default.self_link
 
   allow {
@@ -22,7 +22,7 @@ resource "google_compute_firewall" "default" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080", "1000-2000", "22"]
+    ports    = var.firewall_ports
   }
 
   // source_tags = ["web"]
@@ -32,13 +32,13 @@ resource "google_compute_firewall" "default" {
 ### COMPUTE
 ## NGINX PROXY
 resource "google_compute_instance" "nginx_instance" {
-  name         = "nginx-proxy"
-  machine_type = "f1-micro"
+  name         = var.my_compute_instance.name
+  machine_type = var.my_compute_instance.machine_type
   tags = ["web"]
   
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = var.my_compute_instance.image
     }
   }
 
@@ -50,5 +50,5 @@ resource "google_compute_instance" "nginx_instance" {
     }
   }
 
-  metadata_startup_script = "apt update && apt install -y nginx && systemctl start nginx"
+  metadata_startup_script = var.my_compute_instance.metadata_startup_script
 }
