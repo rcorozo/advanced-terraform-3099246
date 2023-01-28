@@ -1,5 +1,5 @@
 ## WEB1
-/* resource "google_compute_instance" "web1" {
+resource "google_compute_instance" "web1" {
   name         = "web1"
   machine_type = "f1-micro"
   
@@ -62,5 +62,5 @@ resource "google_compute_instance" "mysqldb" {
   network_interface {
     network = data.google_compute_network.default.self_link
     subnetwork = google_compute_subnetwork.subnet-1.self_link
-  } */  
+  }
 }

@@ -52,3 +52,70 @@ resource "google_compute_instance" "nginx_instance" {
 
   metadata_startup_script = var.my_compute_instance.metadata_startup_script
 }
+
+## WEB1
+resource "google_compute_instance" "web1" {
+  name         = "web1"
+  machine_type = var.my_compute_instance.machine_type
+  
+  boot_disk {
+    initialize_params {
+      image = var.my_compute_instance.image
+    }
+  }
+
+  network_interface {
+    # A default network is created for all GCP projects
+    network = data.google_compute_network.default.self_link
+    subnetwork = google_compute_subnetwork.subnet-1.self_link
+  }
+}
+## WEB2
+resource "google_compute_instance" "web2" {
+  name         = "web2"
+  machine_type = var.my_compute_instance.machine_type
+  
+  boot_disk {
+    initialize_params {
+      image = var.my_compute_instance.image
+    }
+  }
+
+  network_interface {
+    network = data.google_compute_network.default.self_link
+    subnetwork = google_compute_subnetwork.subnet-1.self_link
+  }
+}
+## WEB3
+resource "google_compute_instance" "web3" {
+  name         = "web3"
+  machine_type = var.my_compute_instance.machine_type
+  
+  boot_disk {
+    initialize_params {
+      image = var.my_compute_instance.image
+    }
+  }
+
+  network_interface {
+    network = data.google_compute_network.default.self_link
+    subnetwork = google_compute_subnetwork.subnet-1.self_link
+  }  
+}
+
+## DB
+resource "google_compute_instance" "mysqldb" {
+  name         = "mysqldb"
+  machine_type = var.my_compute_instance.machine_type
+  
+  boot_disk {
+    initialize_params {
+      image = var.my_compute_instance.image
+    }
+  }
+
+  network_interface {
+    network = data.google_compute_network.default.self_link
+    subnetwork = google_compute_subnetwork.subnet-1.self_link
+  }
+}
