@@ -32,7 +32,8 @@ resource "google_compute_firewall" "default" {
     ports    = var.firewall-ports
   }
 
-  source_tags = var.compute-source-tags
+  # source_tags = var.compute-source-tags
+  source_ranges = ["0.0.0.0/0"]
 }
 
 ### COMPUTE
