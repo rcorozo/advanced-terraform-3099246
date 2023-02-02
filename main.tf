@@ -37,7 +37,7 @@ resource "google_compute_firewall" "default" {
 
 ### COMPUTE
 ## NGINX PROXY
-resource "google_compute_instance" "nginx_instance" {
+resource "google_compute_instance" "this-nginx" {
   name         = "nginx-proxy"
   machine_type = var.environment_machine_type[var.target_environment]
   labels = {
@@ -60,11 +60,12 @@ resource "google_compute_instance" "nginx_instance" {
   }
 }
 
-## WEB1
-resource "google_compute_instance" "web1" {
-  name         = "web1"
+# Compute Instances
+resource "google_compute_instance" "this-web" {
+  count        = 3
+  name         = "web${count.index}"
   machine_type = var.environment_machine_type[var.target_environment]
-  labels = {
+  labels       = {
     environment = var.environment_map[var.target_environment]
   }
   
@@ -79,44 +80,6 @@ resource "google_compute_instance" "web1" {
     network = data.google_compute_network.default.self_link
     subnetwork = google_compute_subnetwork.subnet-1.self_link
   }
-}
-## WEB2
-resource "google_compute_instance" "web2" {
-  name         = "web2"
-  machine_type = var.environment_machine_type[var.target_environment]
-  labels = {
-    environment = var.environment_map[var.target_environment]
-  }
-  
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-    }
-  }
-
-  network_interface {
-    network = data.google_compute_network.default.self_link
-    subnetwork = google_compute_subnetwork.subnet-1.self_link
-  }
-}
-## WEB3
-resource "google_compute_instance" "web3" {
-  name         = "web3"
-  machine_type = var.environment_machine_type[var.target_environment]
-  labels = {
-    environment = var.environment_map[var.target_environment]
-  }
-  
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-    }
-  }
-
-  network_interface {
-    network = data.google_compute_network.default.self_link
-    subnetwork = google_compute_subnetwork.subnet-1.self_link
-  }  
 }
 
 ## DB
