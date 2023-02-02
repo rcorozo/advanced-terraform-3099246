@@ -46,6 +46,8 @@ resource "google_compute_instance" "nginx_instance" {
   }
   tags = var.compute-source-tags
 
+  metadata_startup_script = "apt update && apt install -y nginx && systemctl start nginx"
+  
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
