@@ -11,7 +11,7 @@ resource "tfe_workspace" "dev" {
     organization = var.tfcloud_organization
     tag_names = ["app", "dev-environment"]
     allow_destroy_plan = true
-    auto_apply = true
+    auto_apply = false
     queue_all_runs = false
     file_triggers_enabled = false
     vcs_repo {
@@ -26,7 +26,7 @@ resource "tfe_workspace" "qa" {
     organization = var.tfcloud_organization
     tag_names = ["app", "qa-environment"]
     allow_destroy_plan = true
-    auto_apply = true
+    auto_apply = false
     queue_all_runs = false
     file_triggers_enabled = false
     vcs_repo {

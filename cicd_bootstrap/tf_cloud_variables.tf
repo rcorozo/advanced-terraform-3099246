@@ -14,6 +14,38 @@ resource "tfe_variable" "qa_project_id" {
     description = "QA GCP ProjectID"
 }
 
+resource "tfe_variable" "dev_region" {
+    key = "region"
+    value = var.region
+    category = "terraform"
+    workspace_id = tfe_workspace.dev.id
+    description = "GCP Region"
+}
+
+resource "tfe_variable" "qa_region" {
+    key = "region"
+    value = var.region
+    category = "terraform"
+    workspace_id = tfe_workspace.qa.id
+    description = "GCP Region"
+}
+
+resource "tfe_variable" "dev_zone" {
+    key = "zone"
+    value = var.zone
+    category = "terraform"
+    workspace_id = tfe_workspace.dev.id
+    description = "GCP Zone"
+}
+
+resource "tfe_variable" "qa_zone" {
+    key = "zone"
+    value = var.zone
+    category = "terraform"
+    workspace_id = tfe_workspace.qa.id
+    description = "GCP Zone"
+}
+
 resource "tfe_variable" "dev_target_environment" {
     key = "target_environment"
     value = "DEV"
