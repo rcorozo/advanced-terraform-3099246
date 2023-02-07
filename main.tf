@@ -42,7 +42,7 @@ module "webservers" {
       }
 }
 
-## DB
+## DB (databases)
 resource "google_compute_instance" "mysqldb" {
   name         = "mysqldb"
   machine_type = var.environment_machine_type[var.target_environment]
