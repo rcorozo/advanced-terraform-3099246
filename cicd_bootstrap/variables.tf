@@ -10,6 +10,14 @@ variable "github_oauth_token" {
   
 }
 
+variable "dev-instance_service_account" {
+  type = string
+}
+
+variable "qa-instance_service_account" {
+  type = string
+}
+
 variable "dev-project-id" {
   type = string
 }

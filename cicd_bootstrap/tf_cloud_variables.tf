@@ -46,6 +46,20 @@ resource "tfe_variable" "qa_zone" {
     description = "GCP Zone"
 }
 
+resource "tfe_variable" "dev_instance_service_account" {
+    key = "instance_service_account"
+    value = var.dev-instance_service_account
+    category = "terraform"
+    workspace_id = tfe_workspace.dev.id
+}
+
+resource "tfe_variable" "qa_instance_service_account" {
+    key = "instance_service_account"
+    value = var.qa-instance_service_account
+    category = "terraform"
+    workspace_id = tfe_workspace.qa.id
+}
+
 resource "tfe_variable" "dev_target_environment" {
     key = "target_environment"
     value = "DEV"

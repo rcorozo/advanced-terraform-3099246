@@ -3,6 +3,10 @@ variable "project-id" {
   type = string
 }
 
+variable "instance_service_account" {
+  type = string
+}
+
 variable "org_id" {
   type = string
   default = ""
